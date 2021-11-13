@@ -83,7 +83,7 @@ _prompt_eriner_git() {
 }
 
 if (( ! ${+STATUS_COLOR} )) typeset -g STATUS_COLOR=black
-if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=%{197%}
+if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=%F{197}%f
 if (( ! ${+CLEAN_COLOR} )) typeset -g CLEAN_COLOR=green
 if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=yellow
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
