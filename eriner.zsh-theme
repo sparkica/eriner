@@ -78,9 +78,9 @@ _prompt_eriner_git() {
 }
 
 if (( ! ${+STATUS_COLOR} )) typeset -g STATUS_COLOR=black
-if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=cyan
+if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=white
 if (( ! ${+CLEAN_COLOR} )) typeset -g CLEAN_COLOR=green
-if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=yellow
+if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=white
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 
 setopt nopromptbang prompt{cr,percent,sp,subst}
@@ -98,4 +98,5 @@ if (( ${+functions[git-info]} )); then
 fi
 
 PS1='$(_prompt_eriner_main)'
-unset RPS1
+RPS1='${editor_info[overwrite]}%(?:: %F{red}%?'$ERROR_CHAR'%f) ${(e)git_info[rprompt]}'
+# unset RPS1
