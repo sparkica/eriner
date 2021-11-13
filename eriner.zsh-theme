@@ -11,9 +11,12 @@ _prompt_eriner_main() {
   _prompt_eriner_end
 }
 
-_prompt_eriner_right() {
-  print -n "%K{%T}%k"
+git_commit_hash() {
+  if [ -d .git ]; then
+    git log -1 --pretty=oneline | cut -c -8
+  fi
 }
+
 
 
 ### Segment drawing
@@ -83,7 +86,7 @@ _prompt_eriner_git() {
 }
 
 if (( ! ${+STATUS_COLOR} )) typeset -g STATUS_COLOR=black
-if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=black
+if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=251
 if (( ! ${+CLEAN_COLOR} )) typeset -g CLEAN_COLOR=green
 if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=yellow
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -103,5 +106,4 @@ if (( ${+functions[git-info]} )); then
 fi
 
 PS1='$(_prompt_eriner_main)'
-RPS1='$(_prompt_eriner_right)'
-# unset RPS1
+RPS1='%F{128}$(git_commit_hash)%f'
