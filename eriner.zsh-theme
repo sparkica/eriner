@@ -11,6 +11,11 @@ _prompt_eriner_main() {
   _prompt_eriner_end
 }
 
+_prompt_eriner_right() {
+  print -n "%K{%T}%k"
+}
+
+
 ### Segment drawing
 # Utility functions to make it easy and re-usable to draw segmented prompts.
 
@@ -78,9 +83,9 @@ _prompt_eriner_git() {
 }
 
 if (( ! ${+STATUS_COLOR} )) typeset -g STATUS_COLOR=black
-if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=white
+if (( ! ${+PWD_COLOR} )) typeset -g PWD_COLOR=%{197%}
 if (( ! ${+CLEAN_COLOR} )) typeset -g CLEAN_COLOR=green
-if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=white
+if (( ! ${+DIRTY_COLOR} )) typeset -g DIRTY_COLOR=yellow
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 
 setopt nopromptbang prompt{cr,percent,sp,subst}
@@ -98,5 +103,5 @@ if (( ${+functions[git-info]} )); then
 fi
 
 PS1='$(_prompt_eriner_main)'
-RPS1='${editor_info[overwrite]}%(?:: %F{red}%?'$ERROR_CHAR'%f) ${(e)git_info[rprompt]}'
+RPS1='$(_prompt_eriner_right)'
 # unset RPS1
